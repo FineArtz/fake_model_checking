@@ -24,10 +24,6 @@ def check_grammar():
     print(tree.toStringTree(recog=parser))
     visitor = KeyVisitor()
     visitor.visit(tree)
-
-    # printer = KeyPrinter()
-    # walker = ParseTreeWalker()
-    # walker.walk(printer, tree)
     
 
 def check_ast():
