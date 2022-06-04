@@ -1,4 +1,5 @@
 # structures to store TS and NBA
+
 from typing import Dict, Generic, Hashable, List, Set, Tuple, TypeVar, Union
 
 
@@ -54,8 +55,6 @@ class NBA(Generic[T]):
             self.state_map[q] = i
         self.aug_map: Dict[T, int] = None
         self.in_count: Dict[T, int] = {q : 0 for q in self.Q}
-        # self.trans: List[Tuple[int, Tuple[int, ...], int]] = [] # transitions (q, a) -> q'
-        # self.trans_map: Dict[Tuple[int, Tuple[int, ...]], List[int]] = {}
 
     def add_trans(self, q: T, a: Tuple[int, ...], qq: T) -> None:
         aa = list(a)

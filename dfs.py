@@ -4,27 +4,27 @@ from typing import Hashable, List, Set, Tuple, TypeVar
 from structure import NBA, TS
 
 
-T = TypeVar('T', bound=Hashable)
-U = TypeVar('U', bound=Hashable)
+M = TypeVar('M', bound=Hashable)
+N = TypeVar('N', bound=Hashable)
 
 
-def check(ts: TS[Tuple[U, int]], nba: NBA[Tuple[T, int]]) -> bool:
-    R: Set[Tuple[U, int]] = set()
-    U: List[Tuple[U, int]] = []
+def check(ts: TS[Tuple[M, int]], nba: NBA[N]) -> bool:
+    R: Set[Tuple[M, int]] = set()
+    U: List[Tuple[M, int]] = []
     I = set(ts.I)
     cycle = False
 
-    def post(s: Tuple[U, int]) -> Set[Tuple[U, int]]:
-        P = set()
+    def post(s: Tuple[M, int]) -> Set[Tuple[M, int]]:
+        P: Set[Tuple[M, int]] = set()
         for a in range(ts.action_set.num_str):
             t = ts.trans_map.get((s, a), [])
             P.update(t)
         return P
 
-    def cycle_check(s: Tuple[U, int]) -> bool:
+    def cycle_check(s: Tuple[M, int]) -> bool:
         nonlocal cycle
-        T: set[Tuple[U, int]] = {s}
-        V: list[Tuple[U, int]] = [s]
+        T: set[Tuple[M, int]] = {s}
+        V: list[Tuple[M, int]] = [s]
         while True:
             ss = V[-1]
             P = post(ss)
@@ -41,7 +41,7 @@ def check(ts: TS[Tuple[U, int]], nba: NBA[Tuple[T, int]]) -> bool:
                 break
         return cycle
 
-    def reachable_cycle(s: Tuple[U, int]) -> None:
+    def reachable_cycle(s: Tuple[M, int]) -> None:
         nonlocal cycle
         U.append(s)
         R.add(s)

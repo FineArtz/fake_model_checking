@@ -1,11 +1,12 @@
 # parse from file
 
-from typing import List
+from typing import Any, List
 
 from structure import *
 
 DEFAULT_TS_FILE = 'TS.txt'
 DEFAULT_BM_FILE = 'benchmark.txt'
+DEFAULT_OUTPUT = 'answer.txt'
 
 
 def read_int(s: str) -> List[int]:
@@ -54,3 +55,9 @@ def read_BM(file: str = DEFAULT_BM_FILE) -> Tuple[List[str], List[Tuple[int, str
             s, l = f.readline().strip().split(' ', maxsplit=1)
             ltl_state.append((int(s), l))
     return ltl_all, ltl_state
+
+
+def write_ans(s: Any, file: str = DEFAULT_OUTPUT) -> None:
+    with open(file, 'a') as f:
+        f.write(str(s))
+        f.write('\n')

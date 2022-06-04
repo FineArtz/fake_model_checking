@@ -1,5 +1,3 @@
-import random
-import os
 from antlr4 import *
 from antlr.ltlLexer import ltlLexer
 from antlr.ltlParser import ltlParser

@@ -2,6 +2,7 @@
 # AST -> GNBA
 # GNBA -> NBA
 # NBA * TS
+
 from typing import FrozenSet
 
 from structure import *
@@ -68,7 +69,6 @@ def NBA_product_TS(nba: NBA[T], ts: TS[U]) -> TS[Tuple[U, int]]:
             pp = nba.get(q, tuple(ts.AP[t]))
             for p in pp:
                 prod.add_trans((s, nba.state_map[q]), a, (t, nba.state_map[p]))
-                # print(f'({s}, {nba.state_map[q]}) --- {a} --> ({t}, {nba.state_map[p]})')
     for s in ts.I:
         ql: List[T] = []
         for q0 in nba.Q0:
