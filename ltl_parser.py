@@ -75,20 +75,17 @@ class AST:
         parser = ltlParser(tokens)
         tree = parser.formula()
         self.root = ASTBuilder().visit(tree)
-        self._set_parent_and_ap(self.root)
+        self._set_ap(self.root)
         self.closure = self.get_closure()
         self.contains_true = (TRUE_NODE in self.closure)
 
-    def _set_parent_and_ap(self, cur_node: Node) -> None:
+    def _set_ap(self, cur_node: Node) -> None:
         assert cur_node is not None
         if isinstance(cur_node, UnaryNode):
-            cur_node.oprand.parent = cur_node
-            self._set_parent_and_ap(cur_node.oprand)
+            self._set_ap(cur_node.oprand)
         elif isinstance(cur_node, BinaryNode):
-            cur_node.oprand1.parent = cur_node
-            cur_node.oprand2.parent = cur_node
-            self._set_parent_and_ap(cur_node.oprand1)
-            self._set_parent_and_ap(cur_node.oprand2)
+            self._set_ap(cur_node.oprand1)
+            self._set_ap(cur_node.oprand2)
         elif isinstance(cur_node, APNode):
             self.AP.add(cur_node.ap)
 

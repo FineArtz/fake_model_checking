@@ -19,9 +19,12 @@ if __name__ == '__main__':
         ast = AST(f'!({ltl})')
         ts_ = partial_ts(ts, ast, ap)
         gnba = AST_to_GNBA(ast)
+        gnba.print()
         nba = GNBA_to_NBA(gnba)
+        nba.print()
         prod = NBA_product_TS(nba, ts_)
-        edge = prod.trans_map
+        for (s, a), t in prod.trans_map.items():
+            print(f'{s} --- {a} --> {t}')
         acc = check(prod, nba)
         write_ans(int(acc))
 

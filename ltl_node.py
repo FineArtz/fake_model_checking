@@ -49,8 +49,6 @@ def is_commutable(o: BINARY_OP) -> bool:
     
 class Node:
     # interface
-    def __init__(self) -> None:
-        self.parent: Node = None
 
     def _polish(self) -> List[str]:
         # return the Polish notation
@@ -77,9 +75,8 @@ class Node:
 
 class LiteralNode(Node):
 
-    def __init__(self, literal: bool, prt: Node = None) -> None:
+    def __init__(self, literal: bool) -> None:
         self.literal = literal
-        self.parent = prt
 
     def _polish(self) -> List[str]:
         return [str(self.literal)]
@@ -96,9 +93,8 @@ class LiteralNode(Node):
 
 class APNode(Node):
 
-    def __init__(self, ap: str, prt: Node = None) -> None:
+    def __init__(self, ap: str) -> None:
         self.ap = ap
-        self.parent= prt
 
     def _polish(self) -> List[str]:
         return [self.ap]
@@ -115,11 +111,10 @@ class APNode(Node):
 
 class UnaryNode(Node):
 
-    def __init__(self, op: UNARY_OP, opr: Node = None, prt: Node = None) -> None:
+    def __init__(self, op: UNARY_OP, opr: Node = None) -> None:
         self.op = op
         self.op_str = INV_OP_DICT[op]
         self.oprand = opr
-        self.parent = prt
 
     def _polish(self) -> List[str]:
         return [self.op_str] + self.oprand._polish()
@@ -136,7 +131,7 @@ class UnaryNode(Node):
 
 class BinaryNode(Node):
 
-    def __init__(self, op: BINARY_OP, opr1: Node = None, opr2: Node = None, prt: Node = None) -> None:
+    def __init__(self, op: BINARY_OP, opr1: Node = None, opr2: Node = None) -> None:
         self.op = op
         self.op_str = INV_OP_DICT[op]
         self.oprand1 = opr1
@@ -144,7 +139,6 @@ class BinaryNode(Node):
         if is_commutable(op) and hash(self.oprand1) > hash(self.oprand2):
             self.oprand1 = opr2
             self.oprand2 = opr1
-        self.parent = prt
 
     def _polish(self) -> List[str]:
         return [self.op_str] + self.oprand1._polish() + self.oprand2._polish()
