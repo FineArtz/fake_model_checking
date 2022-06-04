@@ -4,6 +4,7 @@ from typing import Any, List
 
 from structure import *
 
+
 DEFAULT_TS_FILE = 'TS.txt'
 DEFAULT_BM_FILE = 'benchmark.txt'
 DEFAULT_OUTPUT = 'answer.txt'
@@ -13,7 +14,9 @@ def read_int(s: str) -> List[int]:
     return list(map(int, s.strip().split(' ')))
 
 
-def read_TS(file: str = DEFAULT_TS_FILE) -> Tuple[TS[int], StrMap]:
+def read_TS(file: str = None) -> Tuple[TS[int], StrMap]:
+    if file is None:
+        file = DEFAULT_TS_FILE
     print(f"TS input file: {file}")
     ts = TS[int]()
     apset = StrMap() 
@@ -43,7 +46,9 @@ def read_TS(file: str = DEFAULT_TS_FILE) -> Tuple[TS[int], StrMap]:
     return ts, apset
         
 
-def read_BM(file: str = DEFAULT_BM_FILE) -> Tuple[List[str], List[Tuple[int, str]]]:
+def read_BM(file: str = None) -> Tuple[List[str], List[Tuple[int, str]]]:
+    if file is None:
+        file = DEFAULT_BM_FILE
     print(f"Benchmark input file: {file}")
     ltl_all: List[str] = []
     ltl_state: List[Tuple[int, str]] = []
@@ -57,7 +62,9 @@ def read_BM(file: str = DEFAULT_BM_FILE) -> Tuple[List[str], List[Tuple[int, str
     return ltl_all, ltl_state
 
 
-def write_ans(s: Any, file: str = DEFAULT_OUTPUT) -> None:
+def write_ans(s: Any, file: str = None) -> None:
+    if file is None:
+        file = DEFAULT_OUTPUT
     with open(file, 'a') as f:
         f.write(str(s))
         f.write('\n')

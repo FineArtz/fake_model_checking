@@ -1,3 +1,5 @@
+import argparse
+
 from dfs import check
 from ltl_parser import AST
 from reader import read_BM, read_TS, write_ans
@@ -5,8 +7,13 @@ from transform import AST_to_GNBA, GNBA_to_NBA, NBA_product_TS, partial_ts
 
 
 if __name__ == '__main__':
-    ts, ap = read_TS()
-    ltl_all, ltl_state = read_BM()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-ts', type=str, default=None)
+    parser.add_argument('-bm', '--benchmark', type=str, default=None)
+    args = parser.parse_args()
+
+    ts, ap = read_TS(args.ts)
+    ltl_all, ltl_state = read_BM(args.benchmark)
     
     for ltl in ltl_all:
         ast = AST(f'!({ltl})')
