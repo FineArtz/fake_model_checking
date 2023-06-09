@@ -2,6 +2,8 @@
 
 The project of CS3959 Model Checking, ACM Class, Shanghai Jiao Tong University.
 
+Please leave a star if this repo helps you. Thank you!
+
 # Usage
 
 To prepare the environment, please install the SPECIFIC VERSION of `antlr4-python3-runtime` by
@@ -123,4 +125,4 @@ For each tuple `(s, q)`, `s` represents the state in the original TS and `q` rep
 
 ## Nested DFS
 
-We follow *Algorithm 7, 8 (Page 210, 211)* to performe the final check, using `check()` in `dfs.py`. It returns `True` if no cycle is found, and `False` other wise. To judge whether the state `(s,q) \vDash \Phi`, we check if `q` is the final state of the NBA. We implement the algorithm strictly as the pseudo-code in the textbook.
+We follow *Algorithm 7, 8 (Page 210, 211)* to performe the final check, using `check()` in `dfs.py`. It returns `True` if no cycle is found, and `False` other wise. To judge whether the state $(s,q) \vDash \Phi$, we check if `q` is the final state of the NBA. We implement the algorithm strictly as the pseudo-code in the textbook.
